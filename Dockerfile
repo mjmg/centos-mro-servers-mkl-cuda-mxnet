@@ -1,5 +1,9 @@
 FROM mjmg/centos-mro-rstudio-opencpu-shiny-server-cuda
 
+# Build packages with multiple threads
+RUN \
+  MAKE="make $(nproc)"
+
 # Setup NVIDIA CUDNN 6 devel
 # From https://gitlab.com/nvidia/cuda/blob/centos7/8.0/devel/cudnn6/Dockerfile
 ENV CUDNN_VERSION 6.0.21
