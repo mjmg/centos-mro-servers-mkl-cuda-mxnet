@@ -30,6 +30,10 @@ RUN \
   make USE_OPENCV=1 USE_BLAS=mkl USE_MKL2017=1 USE_MKL2017_EXPERIMENTAL=1 USE_CUDA=1 USE_CUDA_PATH=$CUDA_HOME USE_CUDNN=1
 
 RUN \
+  echo "/usr/local/lib" >> /etc/ld.so.conf.d/local-lib.conf && \
+  ldconfig
+
+RUN \
   cd /tmp/mxnet/ && \
   make rpkg && \
   R CMD INSTALL mxnet_current_r.tar.gz
