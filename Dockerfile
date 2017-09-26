@@ -1,5 +1,7 @@
 FROM mjmg/centos-mro-rstudio-opencpu-shiny-server-cuda
 
+ENV MXNET_VERSION 0.11.0 
+
 # Build packages with multiple threads
 RUN \
   MAKE="make $(nproc)"
@@ -17,14 +19,12 @@ RUN CUDNN_DOWNLOAD_SUM=b667807f2b82af7a9ed5451e9ff5ea7a11deeef85aafdc5529e1adfdd
     rm cudnn-8.0-linux-x64-v7.tgz && \
     ldconfig
 
-
-
 RUN \
   yum install -y cairo-devel libXt-devel opencv-devel
 
 RUN \
   cd /tmp && \
-  git clone --recursive https://github.com/dmlc/mxnet
+  git clone --recursive https://github.com/apache/incubator-mxnet.git mxnet --branch MXNET_VERSION
 
 RUN \
   cd mxnet && \
