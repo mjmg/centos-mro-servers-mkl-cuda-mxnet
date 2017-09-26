@@ -24,7 +24,7 @@ RUN \
 
 RUN \
   cd /tmp && \
-  git clone --recursive https://github.com/apache/incubator-mxnet.git mxnet --branch MXNET_VERSION
+  git clone --recursive https://github.com/apache/incubator-mxnet.git mxnet --branch $MXNET_VERSION
 
 RUN \
   cd mxnet && \
