@@ -4,18 +4,19 @@ FROM mjmg/centos-mro-rstudio-opencpu-shiny-server-cuda
 RUN \
   MAKE="make $(nproc)"
 
-# Setup NVIDIA CUDNN 6 devel
-# From https://gitlab.com/nvidia/cuda/blob/centos7/8.0/devel/cudnn6/Dockerfile
-ENV CUDNN_VERSION 6.0.21
+# Setup NVIDIA CUDNN 7 devel
+# From https://gitlab.com/nvidia/cuda/blob/centos7/8.0/devel/cudnn7/Dockerfile
+ENV CUDNN_VERSION 7.0.2.38
 LABEL com.nvidia.cudnn.version="${CUDNN_VERSION}"
 
 # cuDNN license: https://developer.nvidia.com/cudnn/license_agreement
-RUN CUDNN_DOWNLOAD_SUM=9b09110af48c9a4d7b6344eb4b3e344daa84987ed6177d5c44319732f3bb7f9c && \
-    curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v6.0/cudnn-8.0-linux-x64-v6.0.tgz -O && \
-    echo "$CUDNN_DOWNLOAD_SUM  cudnn-8.0-linux-x64-v6.0.tgz" | sha256sum -c - && \
-    tar --no-same-owner -xzf cudnn-8.0-linux-x64-v6.0.tgz -C /usr/local && \
-    rm cudnn-8.0-linux-x64-v6.0.tgz && \
+RUN CUDNN_DOWNLOAD_SUM=b667807f2b82af7a9ed5451e9ff5ea7a11deeef85aafdc5529e1adfddcc069ca && \
+    curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v7.0.2/cudnn-8.0-linux-x64-v7.tgz -O && \
+    echo "$CUDNN_DOWNLOAD_SUM  cudnn-8.0-linux-x64-v7.tgz" | sha256sum -c - && \
+    tar --no-same-owner -xzf cudnn-8.0-linux-x64-v7.tgz -C /usr/local && \
+    rm cudnn-8.0-linux-x64-v7.tgz && \
     ldconfig
+
 
 
 RUN \
